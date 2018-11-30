@@ -1,0 +1,32 @@
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+ @font-face {
+   font-family: 'CustomFont';
+   src: url(https://fonts.googleapis.com/css?family=Montserrat);
+ }
+
+ body{
+   height: 100%;
+   background-color: #191919;
+   padding-left: 5%;
+   padding-right: 5%;
+   padding-bottom: 5%;
+   padding-top: 70px;
+ }
+
+ h1{
+   text-align: center;
+   text-transform: lowercase;
+   letter-spacing: .2em;
+   font-size: 3em;
+   font-family: 'CustomFont', sans-serif;
+   font-weight:150;
+   color: white;
+   margin-bottom: 70px;
+ }
+
+#map {
+  height: 100%;
+  margin-bottom: 5%;
+  border-radius: 2%;
+}

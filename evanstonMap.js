@@ -67,6 +67,42 @@ var restaraunts = [
   {
     content: 'Edzo\'s Burger Shop',
     coords: {lat: 42.0462027, lng:-87.6837355}
+  },
+  {
+    content: 'Joy Yee Noodle',
+    coords: {lat: 42.0461335, lng: -87.6790438}
+  },
+  {
+    content: 'Taco Diablo',
+    coords: {lat: 42.0469013,lng: -87.6885803}
+  },
+  {
+    content: 'Bangers & Lace',
+    coords: {lat: 42.0460647,lng: -87.6857479}
+  },
+  {
+    content: 'Prairie Moon',
+    coords: {lat: 42.0476183, lng: -87.6814885}
+  },
+  {
+    content: 'Le Peep',
+    coords: {lat: 42.04863, lng: -87.6831}
+  },
+  {
+    content: 'Found Kitchen and Social House',
+    coords: {lat: 42.0483293, lng: -87.6836258}
+  },
+  {
+    content: 'Farmhouse Evanston',
+    coords: {lat: 42.0488301, lng: -87.6831065}
+  },
+  {
+    content: 'Pete Miller\'s Steak & Seafood',
+    coords: {lat: 42.0459133, lng: -87.6837743}
+  },
+  {
+    content: 'Olive Mediterranean Grill',
+    coords: {lat: 42.0494211, lng: -87.6825275}
   }
 ]
 

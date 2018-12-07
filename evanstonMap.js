@@ -53,57 +53,123 @@ var evanston = new google.maps.Map(document.getElementById('map'), mapQualities)
 //list of restaraunt names and their locations
 var restaraunts = [
   {
-    content: 'Table to Stix Ramen',
-    coords: {lat:42.0472079, lng:-87.6854}
+    content: 'Bangers & Lace',
+    coords: {lat: 42.045393,lng:-87.682453}
+  },
+
+  {
+    content: 'Burger King',
+    coords: {lat: 42.049787,lng:-87.680393}
+  },
+
+
+  {
+    content: 'Dave\'s New Kitchen',
+    coords: {lat: 42.058642, lng:-87.682509}
+  },
+
+
+  {
+    content: 'Edzo\'s Burger Shop',
+    coords: {lat: 42.046205, lng: -87.681551}
+  },
+
+  {
+    content: 'Evanston Chicken Shack',
+    coords: {lat: 42.052806, lng:-87.687400}
+  },
+
+  {
+    content: 'Farmhouse Evanston',
+    coords: {lat: 42.048570, lng:-87.680934}
+  },
+
+  {
+    content: 'Found Kitchen and Social House',
+    coords: {lat: 42.047181, lng:-87.678702}
+  },
+
+  {
+    content: 'Kung Fu Tea',
+    coords: {lat: 42.049835, lng: -87.681300}
   },
   {
-    content: 'Lou Malnati\'s Pizzeria',
-    coords: {lat: 42.0514, lng:-87.6841}
+    content: 'Joy Yee Noodle',
+    coords: {lat: 42.0461335, lng:-87.6790438}
   },
+
+  {
+    content: 'Le Peep',
+    coords: {lat: 42.04863, lng:-87.6831}
+  },
+
+  {
+    content: 'Lou Malnati\'s Pizzeria',
+    coords: {lat: 42.051472, lng:-87.682003}
+  },
+
   {
     content: 'Mt. Everest Restaraunt',
     coords: {lat: 42.04804684, lng:-87.6804156}
   },
-  {
-    content: 'Edzo\'s Burger Shop',
-    coords: {lat: 42.0462027, lng:-87.6837355}
-  },
-  {
-    content: 'Joy Yee Noodle',
-    coords: {lat: 42.0461335, lng: -87.6790438}
-  },
-  {
-    content: 'Taco Diablo',
-    coords: {lat: 42.0469013,lng: -87.6885803}
-  },
-  {
-    content: 'Bangers & Lace',
-    coords: {lat: 42.0460647,lng: -87.6857479}
-  },
-  {
-    content: 'Prairie Moon',
-    coords: {lat: 42.0476183, lng: -87.6814885}
-  },
-  {
-    content: 'Le Peep',
-    coords: {lat: 42.04863, lng: -87.6831}
-  },
-  {
-    content: 'Found Kitchen and Social House',
-    coords: {lat: 42.0483293, lng: -87.6836258}
-  },
-  {
-    content: 'Farmhouse Evanston',
-    coords: {lat: 42.0488301, lng: -87.6831065}
-  },
-  {
-    content: 'Pete Miller\'s Steak & Seafood',
-    coords: {lat: 42.0459133, lng: -87.6837743}
-  },
+
   {
     content: 'Olive Mediterranean Grill',
-    coords: {lat: 42.0494211, lng: -87.6825275}
+    coords: {lat: 42.049437, lng:-87.682010}
+  },
+
+  {
+    content: 'Panera Bread',
+    coords: {lat: 42.048636, lng:-87.682197}
+  },
+
+  {
+    content: 'Peppercorns Kitchen',
+    coords: {lat: 42.046276, lng:-87.680845}
+  },
+
+  {
+    content: 'Pete Miller\'s Steak & Seafood',
+    coords: {lat: 42.045920, lng:  -87.681585}
+  },
+
+  {
+    content: 'Prairie Moon',
+    coords: {lat: 42.047415, lng:-87.678841}
+  },
+
+  {
+    content: 'Shang Noodle and Chinese',
+    coords: {lat: 42.046168, lng:-87.680282}
+  },
+
+  {
+    content: 'Table to Stix Ramen',
+    coords: {lat:42.0472079, lng:-87.6854}
+  },
+
+  {
+    content: 'Taco Diablo',
+    coords: {lat: 42.046922,lng:-87.686389}
+  },
+
+  {
+    content: 'Tapas Barcelona',
+    coords: {lat:42.046715, lng:-87.679121}
+  },
+
+  {
+    content: 'Todoroki',
+    coords: {lat:42.045884, lng:-87.679306}
+  },
+
+  {
+    content: 'World of Beer',
+    coords: {lat:42.047214, lng:-87.681631}
   }
+
+
+
 ]
 
 var infoWindows=[];

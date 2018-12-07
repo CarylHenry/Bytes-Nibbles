@@ -1,10 +1,13 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
+ @import url(https://fonts.googleapis.com/css?family=Skranji );
+ 
  @font-face {
-   font-family: 'CustomFont';
-   src: url(https://fonts.googleapis.com/css?family=Montserrat);
+   font-family: 'Skranji';
+   src: url(https://fonts.googleapis.com/css?family=Skranji);
  }
 
+ 
  body{
    height: 100%;
    background-color: #191919;
@@ -18,15 +21,25 @@
    text-align: center;
    text-transform: lowercase;
    letter-spacing: .2em;
-   font-size: 3em;
-   font-family: 'CustomFont', sans-serif;
+   font-size: 3.2em;
+   font-family: 'Skranji', serif;
    font-weight:150;
    color: white;
-   margin-bottom: 70px;
+   margin-bottom: 40px;
  }
 
 #map {
   height: 100%;
   margin-bottom: 5%;
-  border-radius: 2%;
+  border-radius: 5%;
+}
+
+.input-field {
+  height: 30px;
+  width: 900px;
+  padding: 5px;
+  margin: 30px;
+  border: 3px solid #c0c0c0;
+  border-radius: 2px;
+  text-align: left;
 }

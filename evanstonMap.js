@@ -54,117 +54,141 @@ var evanston = new google.maps.Map(document.getElementById('map'), mapQualities)
 var restaraunts = [
   {
     content: 'Bangers & Lace',
-    coords: {lat: 42.045393,lng:-87.682453}
+    coords: {lat: 42.045393,lng:-87.682453},
+    open: true
+
   },
 
   {
     content: 'Burger King',
-    coords: {lat: 42.049787,lng:-87.680393}
+    coords: {lat: 42.049787,lng:-87.680393},
+    open: false
   },
 
   {
     content: 'Dave\'s New Kitchen',
-    coords: {lat: 42.058642, lng:-87.682509}
+    coords: {lat: 42.058642, lng:-87.682509},
+    open: false
   },
 
 
   {
     content: 'Edzo\'s Burger Shop',
-    coords: {lat: 42.046205, lng: -87.681551}
+    coords: {lat: 42.046205, lng: -87.681551},
+    open: false
   },
 
   {
     content: 'Evanston Chicken Shack',
-    coords: {lat: 42.052806, lng:-87.687400}
+    coords: {lat: 42.052806, lng:-87.687400},
+    open: false
   },
 
   {
     content: 'Farmhouse Evanston',
-    coords: {lat: 42.048570, lng:-87.680934}
+    coords: {lat: 42.048570, lng:-87.680934},
+    open: false
   },
 
   {
     content: 'Found Kitchen and Social House',
-    coords: {lat: 42.047181, lng:-87.678702}
+    coords: {lat: 42.047181, lng:-87.678702},
+    open: false
   },
 
   {
     content: 'Kung Fu Tea',
-    coords: {lat: 42.049835, lng: -87.681300}
+    coords: {lat: 42.049835, lng: -87.681300},
+    open: false
   },
   {
     content: 'Joy Yee Noodle',
-    coords: {lat: 42.0461335, lng:-87.6790438}
+    coords: {lat: 42.0461335, lng:-87.6790438},
+    open: false
   },
 
   {
     content: 'Le Peep',
-    coords: {lat: 42.04863, lng:-87.6831}
+    coords: {lat: 42.04863, lng:-87.6831},
+    open: false
   },
 
   {
     content: 'Lou Malnati\'s Pizzeria',
-    coords: {lat: 42.051472, lng:-87.682003}
+    coords: {lat: 42.051472, lng:-87.682003},
+    open: false
   },
 
   {
     content: 'Mt. Everest Restaraunt',
-    coords: {lat: 42.04804684, lng:-87.6804156}
+    coords: {lat: 42.04804684, lng:-87.6804156},
+    open: false
   },
 
   {
     content: 'Olive Mediterranean Grill',
-    coords: {lat: 42.049437, lng:-87.682010}
+    coords: {lat: 42.049437, lng:-87.682010},
+    open: false
   },
 
   {
     content: 'Panera Bread',
-    coords: {lat: 42.048636, lng:-87.682197}
+    coords: {lat: 42.048636, lng:-87.682197},
+    open: false
   },
 
   {
     content: 'Peppercorns Kitchen',
-    coords: {lat: 42.046276, lng:-87.680845}
+    coords: {lat: 42.046276, lng:-87.680845},
+    open: false
   },
 
   {
     content: 'Pete Miller\'s Steak & Seafood',
-    coords: {lat: 42.045920, lng:  -87.681585}
+    coords: {lat: 42.045920, lng:  -87.681585},
+    open: false
   },
 
   {
     content: 'Prairie Moon',
-    coords: {lat: 42.047415, lng:-87.678841}
+    coords: {lat: 42.047415, lng:-87.678841},
+    open: false
   },
 
   {
     content: 'Shang Noodle and Chinese',
-    coords: {lat: 42.046168, lng:-87.680282}
+    coords: {lat: 42.046168, lng:-87.680282},
+    open: false
   },
 
   {
     content: 'Table to Stix Ramen',
-    coords: {lat:42.0472079, lng:-87.6854}
+    coords: {lat:42.0472079, lng:-87.6854},
+    open: false
   },
 
   {
     content: 'Taco Diablo',
-    coords: {lat: 42.046922,lng:-87.686389}
+    coords: {lat: 42.046922,lng:-87.686389},
+    open: false
   },
 
   {
     content: 'Tapas Barcelona',
-    coords: {lat:42.046715, lng:-87.679121}
+    coords: {lat:42.046715, lng:-87.679121},
+    open: false
   },
 
   {
     content: 'Todoroki',
-    coords: {lat:42.045884, lng:-87.679306}
+    coords: {lat:42.045884, lng:-87.679306},
+    open: false
   },
 
   {
     content: 'World of Beer',
-    coords: {lat:42.047214, lng:-87.681631}
+    coords: {lat:42.047214, lng:-87.681631},
+    open: false
   }
 
 
@@ -198,7 +222,9 @@ function addMarker(restaraunt){
     removeInfoWindows();
     infoWindow.open(evanston, marker)})
 }
-//Creates a rectangle around the marker to show whether the restaurant is opened
+
+
+//Creates a rectangle around the marker to indicate whether the restaurant is opened
 function addRectangle(restaurant){
    var rectangle = new google.maps.Rectangle({
     strokeColor: '#FF0000',
@@ -214,7 +240,11 @@ function addRectangle(restaurant){
       west: restaurant.coords.lng - 0.0001
     }
   });
-
+//Update the color of the rectangle to green if the restaurant is opened
+  if (restaurant.open){
+  rectangle.strokeColor = "#00FF00";
+  rectangle.fillColor = "#00FF00";
+};
 }
 
 //Given a list of restaraunt names and coords, adds them to the map

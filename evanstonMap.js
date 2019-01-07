@@ -62,7 +62,6 @@ var restaraunts = [
     coords: {lat: 42.049787,lng:-87.680393}
   },
 
-
   {
     content: 'Dave\'s New Kitchen',
     coords: {lat: 42.058642, lng:-87.682509}
@@ -199,11 +198,30 @@ function addMarker(restaraunt){
     removeInfoWindows();
     infoWindow.open(evanston, marker)})
 }
+//Creates a rectangle around the marker to show whether the restaurant is opened
+function addRectangle(restaurant){
+   var rectangle = new google.maps.Rectangle({
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35,
+    map: evanston,
+    bounds: {
+      north: restaurant.coords.lat + 0.0001,
+      south: restaurant.coords.lat - 0.0001,
+      east: restaurant.coords.lng + 0.0001,
+      west: restaurant.coords.lng - 0.0001
+    }
+  });
+
+}
 
 //Given a list of restaraunt names and coords, adds them to the map
 function addRestaraunts(places){
   for(var i = 0; i<places.length; i++){
     addMarker(places[i]);
+    addRectangle(places[i]);
   }
 }
 

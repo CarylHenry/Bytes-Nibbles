@@ -11,7 +11,7 @@ function searchFunction(){
      success: function(data){
         var totalresults = data.total;
         var restuarant = data.businesses[0];
-        alert("The key word " + q + " got " + totalresults + " Results. The first of them being " + restuarant.name);
+        alert("The key word " + q + " got " + totalresults + " results. The first of them being " + restuarant.name);
      }
    });
 }

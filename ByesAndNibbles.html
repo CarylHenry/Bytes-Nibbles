@@ -16,26 +16,26 @@
   </head>
   <body>
     <h1>Bytes and Nibbles</h1>
-    
-    <form > 
-        <input class="searchBar" type="search" name="search" required placeholder="Search for restaurant"> 
-        
-        <select class="day">
-          <option value="-1">Select day</option> 
-          <option value="0">Sunday</option> 
+
+    <form>
+        <input class="search-bar search-item" type="search" name="search" required placeholder="Search for restaurant">
+
+        <select class="day search-item">
+          <option value="-1">Select day</option>
+          <option value="0">Sunday</option>
           <option value ="1">Monday</option>
           <option value ="2"> Tuesday</option>
           <option value ="3"> Wednesday</option>
           <option value ="4"> Thursday</option>
           <option value ="5"> Friday </option>
-          <option value ="6"> Saturday</option>  
-        </select> 
+          <option value ="6"> Saturday</option>
+        </select>
 
-        <input class="time" type="time" >
-        <button type="submit">Search</button>     
+        <input class="time search-item" type="time" >
+        <button class="submit search-item" type="submit">Search</button>
 
     </form>
-    
+
     <div id="map"></div>
     <script src="evanstonMap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7rnhLtJ2YGbv5_FFqW8bpCpp002qkFDo&callback=initMap&libraries=places"

@@ -1,6 +1,6 @@
 function searchFunction(){
   var q = document.getElementById("search").value;
-  var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + q ;
+  var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=" + q ;
   $.ajax({
      url: myurl,
      headers: {
@@ -10,8 +10,13 @@ function searchFunction(){
      dataType: 'json',
      success: function(data){
         var totalresults = data.total;
-        var restuarant = data.businesses[0];
-        alert("The key word " + q + " got " + totalresults + " results. The first of them being " + restuarant.name);
+        if (totalresults != 0) {
+        var restaurant = data.businesses[0];
+        alert(totalresults + " restaurants found in " + q + ". The first of them being " + restaurant.name);
+      }
+      else {
+        alert("no results found");
+      }
      }
    });
 }

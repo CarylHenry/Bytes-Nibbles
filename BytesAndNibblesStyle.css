@@ -11,13 +11,8 @@
 
  body{
    height: 100%;
-<<<<<<< HEAD
-   background-color:#597e5e; 
-   
-=======
+   background-color:#597e5e;
    margin: auto;
-   background-color: #d6d6d6;
->>>>>>> a135ee87e97643fb21db0f71ef3f1881d7c7e876
    padding-left: 5%;
    padding-right: 5%;
    padding-bottom: 5%;
@@ -28,24 +23,17 @@
    text-align: center;
    text-transform: lowercase;
    letter-spacing: .2em;
-<<<<<<< HEAD
    font-size: 3.4em;
    font-family: 'Skranji', serif;
    color: #fcce48;
-=======
-   font-size: 3.2em;
-   font-family: 'Roboto', sans-serif;
-   color: white;
->>>>>>> a135ee87e97643fb21db0f71ef3f1881d7c7e876
    margin-bottom: 40px;
  }
 
 
 form{
-<<<<<<< HEAD
   width: 100%;
-  background-color: rgba(237,236,190, 0.9);  
-  
+  background-color: rgba(237,236,190, 0.9);
+
   border-radius: 20px;
   border-style: dashed;
   border-color: grey;
@@ -53,36 +41,19 @@ form{
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-} 
-=======
-  display: flex;
-  justify-content: center;
-  align-items: center;
->>>>>>> a135ee87e97643fb21db0f71ef3f1881d7c7e876
-
   width: 100%;
   height: 80px;
   margin: 20px 0px 40px 0px;
+  border: 3px solid #c0c0c0;
 
-  border-radius: 20px;
-
-  background-color: #ce2b2e;
 }
 
-<<<<<<< HEAD
-  width: 50%;
-  padding: 5px;
-  margin: 20px;
 
-  border: 3px solid #c0c0c0;
-  
-  border-radius: 2px;
-=======
+
 .search-item{
   height: 25px;
   border: none;
   border-radius: 5px;
->>>>>>> a135ee87e97643fb21db0f71ef3f1881d7c7e876
   text-align: left;
   margin: 10px;
   background-color: white;
@@ -91,18 +62,18 @@ form{
 
 }
 
-<<<<<<< HEAD
+
 select {
   width: 20%;
   height: 20px;
   margin-right: 16px ;
-=======
+}
+
 .search-bar {
   width: 40%;
   height: 25px;
   margin: 10px;
   padding-left: 5px;
->>>>>>> a135ee87e97643fb21db0f71ef3f1881d7c7e876
   border: none;
   border-radius: 5px;
   text-align: left;
@@ -113,8 +84,7 @@ select{
 }
 
 .time{
-<<<<<<< HEAD
-  width: 30%
+  width: 30%;
   margin: 20px;
   margin-right: 8px;
 }
@@ -122,14 +92,9 @@ select{
 button{
   margin-right: 20px;
 }
-=======
-  width: 11%;
-}
-
 
 #map {
   height: 100%;
   margin-bottom: 5%;
   border-radius: 5%;
 }
->>>>>>> a135ee87e97643fb21db0f71ef3f1881d7c7e876

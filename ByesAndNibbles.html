@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <link href="BytesAndNibblesStyle.css" rel="stylesheet" type="text/css">
 
+    <script type ="text/javascript" href="backend/searchFunction.js">
+    </script>
+
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -17,9 +20,10 @@
   <body>
     <h1>Bytes and Nibbles</h1>
 
-    <form>
-        <input class="search-bar search-item" type="search" name="search" required placeholder="Search for restaurant">
+    <div id ="form">
+      <div class="searchBar">
 
+        <input type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
         <select class="day search-item">
           <option value="-1">Select day</option>
           <option value="0">Sunday</option>
@@ -30,15 +34,22 @@
           <option value ="5"> Friday </option>
           <option value ="6"> Saturday</option>
         </select>
-
         <input class="time search-item" type="time" >
-        <button class="submit search-item" type="submit">Search</button>
+        <input type= "submit" value="Search"  onclick="searchFunction()">
+      </div>
 
-    </form>
+    </div>
 
     <div id="map"></div>
     <script src="evanstonMap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7rnhLtJ2YGbv5_FFqW8bpCpp002qkFDo&callback=initMap&libraries=places"
     async defer></script>
+
+
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+  <script src = backend/searchFunction.js>
+
+  </script>
 </html>

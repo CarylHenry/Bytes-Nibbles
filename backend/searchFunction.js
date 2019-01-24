@@ -1,8 +1,253 @@
-function searchFunction(){
-  var q = document.getElementById("search").value;
-  var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true" ;
+//Gloabl variable for map
+var map;
+
+function displayMap() {
+
+//What area the map displays
+//What the map centers on + user controls for display
+var mapQualities = {
+  center: {lat: 42.047719, lng: -87.683712},
+  zoom: 16.3,
+  mapTypeControl: false,
+  streetViewControl: false,
+  styles: [
+    {
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#f3f4f4"
+            },
+            {
+                "saturation": -84
+            },
+            {
+                "lightness": 59
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#ffffff"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 100
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#83cead"
+            },
+            {
+                "saturation": 1
+            },
+            {
+                "lightness": -15
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.school",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#00ffff"
+            },
+            {
+                "saturation": -60
+            },
+            {
+                "lightness": 23
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ffffff"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 100
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#bbbbbb"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 26
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ffcc00"
+            },
+            {
+                "saturation": 100
+            },
+            {
+                "lightness": -22
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ffcc00"
+            },
+            {
+                "saturation": 100
+            },
+            {
+                "lightness": -35
+            },
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#7fc8ed"
+            },
+            {
+                "saturation": 55
+            },
+            {
+                "lightness": -6
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#7fc8ed"
+            },
+            {
+                "saturation": 55
+            },
+            {
+                "lightness": -6
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    }
+  ]
+};
+    var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
+    map = evanston;
+
+
+
+}
+
+//init function called at the start of the launch
+//this calls the api to check for currently opened busniesses and shows them on the map
+function init() {
+  //Here is a very weird thing about Yelp: it only returns fifty busnineses max in each call
+  //what we are doing here getting the first 150 results //
+  //by calling the api three times and using different offsets for each one
+  //Here we are calling for results 0 - 49
+  var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&radius=2000" ;
+  initHelper(myurl);
+  //Here we are calling for results 50 - 99
+  var myurl2 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=50&radius=2000" ;
+  initHelper(myurl2);
+  //Here we are calling for result 100 - 149
+  var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
+  initHelper(myurl3);
+
+}
+//the intHelper helps us call the yelp api in the init function
+function initHelper(url){
   $.ajax({
-     url: myurl,
+     url: url,
      headers: {
       'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',
   },
@@ -11,8 +256,11 @@ function searchFunction(){
      success: function(data){
         var totalresults = data.total;
         if (totalresults != 0) {
-        var restaurant = data.businesses[0];
-        alert(totalresults + " restaurants found in " + q + ". The first of them being " + restaurant.name);
+        totalOpened = totalresults;
+        var i = 0;
+        for (i; i < totalresults; i++) {
+          addMarker(data.businesses[i]);
+        }
       }
       else {
         alert("no results found");
@@ -25,6 +273,9 @@ function searchFunction(){
 //we will find the exact name of the restaurant the user is looking for
 //Since the name search of yelp only gives back results if the EXACT name or ID is searched
 function searchByName() {
+
+  //for every new search remove all markers and infoWindows from previous search
+
   // Get search value form html
   var q = document.getElementById("search").value;
   //Gnerate URL to call the api
@@ -95,6 +346,9 @@ function searchByName() {
 //         }
 //     ]
 
+//These two arrays correspond to all markers and inforWindows shown on the map
+var markers = [];
+var infoWindows = [];
 //This function takes the businesses ids generated from the previous searchFunction
 //and utilizes the businesse object to
 //1, draw the location on the map
@@ -111,10 +365,14 @@ function searchById(id) {
    method: 'GET',
    dataType: 'json',
    success: function(data){
+
+     //if the place is not closed we add it on the map
      if (data.is_closed == false) {
-      alert(data.name + " is opened now!");}
+      alert(data.name + " is opened now!");
+      addMarker(data);
+    }
      else {
-       alert(data.name + " is closed and will open at " + data.hours.open[0].start);
+       alert(data.name + " is closed and will open at " + data.hours[0].open[0].start);
      }
     }
    });
@@ -219,3 +477,27 @@ function searchById(id) {
 //     ],
 //     "special_hours": []
 // }
+
+function addMarker(data) {
+    var name = data.name;
+    var coords = {lat: data.coordinates.latitude,lng: data.coordinates.longitude};
+//add a new marker object
+    var marker = new google.maps.Marker({
+      position: coords,
+      map: map
+    });
+//push this marker in the markers array
+    markers.push(marker);
+//make a new info window with this page
+    var infoWindow=new google.maps.InfoWindow({
+      content: name});
+//push it into the infowindow array
+    infoWindows.push(infoWindow);
+//make it so the infoWindow pops up when you click the marker and all other infoWindows close
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker)})
+}
+
+//this function clears all markers and info windows in the map
+
+//=init();

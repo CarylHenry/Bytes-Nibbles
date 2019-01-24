@@ -1,4 +1,3 @@
-
 function initMap() {
 
 //What the map centers on + user controls for display
@@ -135,43 +134,87 @@ var mapQualities = {
         ]
     },
     {
-      featureType: 'administrative',
-      elementType: 'labels',
-      stylers: [{visibility: 'off'}]
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ffcc00"
+            },
+            {
+                "saturation": 100
+            },
+            {
+                "lightness": -22
+            },
+            {
+                "visibility": "on"
+            }
+        ]
     },
     {
-      featureType: 'landscape'.
-      elementType: 'labels',
-      stylers: [{visibility: 'off'}]
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ffcc00"
+            },
+            {
+                "saturation": 100
+            },
+            {
+                "lightness": -35
+            },
+            {
+                "visibility": "simplified"
+            }
+        ]
     },
     {
-      featureType: 'poi',
-      elementType: 'labels',
-      stylers: [{visibility: 'off'}]
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      featureType: 'transit',
-      elementType: 'labels',
-      stylers: [{visibility: 'off'}]
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#7fc8ed"
+            },
+            {
+                "saturation": 55
+            },
+            {
+                "lightness": -6
+            },
+            {
+                "visibility": "on"
+            }
+        ]
     },
-
     {
-      featureType: 'water',
-      elementType: 'labels',
-      stylers: [{visibility: 'off'}]
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#7fc8ed"
+            },
+            {
+                "saturation": 55
+            },
+            {
+                "lightness": -6
+            },
+            {
+                "visibility": "off"
+            }
+        ]
     }
-  ],
-  {name: 'Styled Map'}
-);
-*/
-
-//What the map centers on + user controls for display
-var mapQualities = {
-  center: {lat: 42.047719, lng: -87.683712},
-  zoom: 16.3,
-  mapTypeControl: false,
-  streetViewControl: false,
-  //mapTypeControlOptions: {mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']},
+  ]
 };
 
 //Create the map

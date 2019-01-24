@@ -1,10 +1,8 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
- @import url(https://fonts.googleapis.com/css?family=Skranji );
  @import url(https://fonts.googleapis.com/css?family=Roboto);
  @font-face {
-   font-family: 'Skranji', 'Roboto';
-   src: url(https://fonts.googleapis.com/css?family=Skranji);
+   font-family: 'Roboto';
    src: url(https://fonts.googleapis.com/css?family=Roboto);
  }
 
@@ -32,6 +30,7 @@
 
 #form{
   display: flex;
+  flex-wrap: wrap-reverse;
   justify-content: center;
   align-items: center;
 
@@ -48,30 +47,28 @@
   height: 25px;
   border: none;
   border-radius: 5px;
-  text-align: left;
+  text-align: center;
   margin: 10px;
   background-color: white;
   font-family: 'Roboto', sans-serif;
-
-
 }
 
-.search-bar {
-  width: 40%;
-  height: 25px;
-  margin: 10px;
-  padding-left: 5px;
-  border: none;
-  border-radius: 5px;
+.text-search{
+  width: 30%;
   text-align: left;
+  padding-left: 1%;
 }
 
-select{
+.day-search{
   width: 15%;
 }
 
-.time{
-  width: 11%;
+.time-search{
+  width: 110px;
+}
+
+.submit-search{
+  width: 10%;
 }
 
 

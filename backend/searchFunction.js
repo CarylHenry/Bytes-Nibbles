@@ -102,6 +102,9 @@ function searchByName() {
 // The structure of the businesse object is shown below the funtion
 function searchById(id) {
   // this is the same api call from avbe except the search is now a id search
+   var date = document.getElementById("weekday").value;
+   var time = document.getElementById("timeofday").value;
+   time = "" + time.substring(0,2) + time.substring(time.length-2,time.length);
    var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + id;
    $.ajax({
       url: myurl,
@@ -111,12 +114,30 @@ function searchById(id) {
    method: 'GET',
    dataType: 'json',
    success: function(data){
-     if (data.is_closed == false) {
-      alert(data.name + " is opened now!");}
+    if (time == ""){
+          if (data.is_closed == false) {
+      alert(data.name + " is open now!");}
      else {
        alert(data.name + " is closed and will open at " + data.hours.open[0].start);
-     }
-    }
+          }
+      }
+      var bool1 = (data.hours[0].open[0].start <= time && data.hours[0].open[0].end >= time);
+      if (bool1 == true){
+      alert(data.name + " is open now!");}
+      if (bool1 == false){
+        alert(data.name + " is closed and will open at " + data.hours[0].open[0].start)
+      }
+
+  /*    else {
+
+      if (data.hours[0].open[0].start =< time && data.hours[0].open[0].end >= time) {
+      alert(data.name + " is open now!");}
+     else {
+        alert(data.name + " is closed and will open at " + data.hours[0].open[0].start);
+          }
+
+      } */
+ }
    });
 }
 

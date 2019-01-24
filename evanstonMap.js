@@ -1,10 +1,139 @@
 
 function initMap() {
 
-//What area the map displays
-/*
-var styledMapType=new google.maps.StyledMapType(
-  [
+//What the map centers on + user controls for display
+var mapQualities = {
+  center: {lat: 42.047719, lng: -87.683712},
+  zoom: 16.3,
+  mapTypeControl: false,
+  streetViewControl: false,
+  styles: [
+    {
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#f3f4f4"
+            },
+            {
+                "saturation": -84
+            },
+            {
+                "lightness": 59
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#ffffff"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 100
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#83cead"
+            },
+            {
+                "saturation": 1
+            },
+            {
+                "lightness": -15
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.school",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#00ffff"
+            },
+            {
+                "saturation": -60
+            },
+            {
+                "lightness": 23
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ffffff"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 100
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#bbbbbb"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 26
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
     {
       featureType: 'administrative',
       elementType: 'labels',
@@ -47,8 +176,6 @@ var mapQualities = {
 
 //Create the map
 var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
-//evanston.mapTypes.set('styled_map', styledMapType);
-//evanston.setMapTypeID('styled_map');
 
 //list of restaraunt names and their locations
 var restaraunts = [
@@ -204,8 +331,13 @@ function addMarker(restaraunt){
   //make a new marker object
   var marker = new google.maps.Marker({
     position: restaraunt.coords,
-    map: evanston
+    map: evanston,
+    icon: {url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"}
   })
+
+  if(restaraunt.open){
+    marker.icon.url = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+  }
 
   //add the marker to the list of markers on the map
   restarauntMarkers.push(marker);
@@ -223,35 +355,10 @@ function addMarker(restaraunt){
     infoWindow.open(evanston, marker)})
 }
 
-
-//Creates a rectangle around the marker to indicate whether the restaurant is opened
-function addRectangle(restaurant){
-   var rectangle = new google.maps.Rectangle({
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35,
-    map: evanston,
-    bounds: {
-      north: restaurant.coords.lat + 0.0001,
-      south: restaurant.coords.lat - 0.0001,
-      east: restaurant.coords.lng + 0.0001,
-      west: restaurant.coords.lng - 0.0001
-    }
-  });
-//Update the color of the rectangle to green if the restaurant is opened
-  if (restaurant.open){
-  rectangle.strokeColor = "#00FF00";
-  rectangle.fillColor = "#00FF00";
-};
-}
-
 //Given a list of restaraunt names and coords, adds them to the map
 function addRestaraunts(places){
   for(var i = 0; i<places.length; i++){
     addMarker(places[i]);
-    addRectangle(places[i]);
   }
 }
 

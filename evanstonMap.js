@@ -1,7 +1,6 @@
 
 function initMap() {
 
-//What area the map displays
 //What the map centers on + user controls for display
 var mapQualities = {
   center: {lat: 42.047719, lng: -87.683712},
@@ -221,8 +220,6 @@ var mapQualities = {
 
 //Create the map
 var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
-//evanston.mapTypes.set('styled_map', styledMapType);
-//evanston.setMapTypeID('styled_map');
 
 //list of restaraunt names and their locations
 var restaraunts = [
@@ -230,6 +227,7 @@ var restaraunts = [
     content: 'Bangers & Lace',
     coords: {lat: 42.045393,lng:-87.682453},
     open: true
+
   },
 
   {
@@ -363,6 +361,9 @@ var restaraunts = [
     coords: {lat:42.047214, lng:-87.681631},
     open: false
   }
+
+
+
 ]
 
 var infoWindows=[];
@@ -374,8 +375,13 @@ function addMarker(restaraunt){
   //make a new marker object
   var marker = new google.maps.Marker({
     position: restaraunt.coords,
-    map: evanston
+    map: evanston,
+    icon: {url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"}
   })
+
+  if(restaraunt.open){
+    marker.icon.url = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+  }
 
   //add the marker to the list of markers on the map
   restarauntMarkers.push(marker);
@@ -393,35 +399,10 @@ function addMarker(restaraunt){
     infoWindow.open(evanston, marker)})
 }
 
-
-//Creates a rectangle around the marker to indicate whether the restaurant is opened
-function addRectangle(restaurant){
-   var rectangle = new google.maps.Rectangle({
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35,
-    map: evanston,
-    bounds: {
-      north: restaurant.coords.lat + 0.0001,
-      south: restaurant.coords.lat - 0.0001,
-      east: restaurant.coords.lng + 0.0001,
-      west: restaurant.coords.lng - 0.0001
-    }
-  });
-//Update the color of the rectangle to green if the restaurant is opened
-  if (restaurant.open){
-  rectangle.strokeColor = "#00FF00";
-  rectangle.fillColor = "#00FF00";
-};
-}
-
 //Given a list of restaraunt names and coords, adds them to the map
 function addRestaraunts(places){
   for(var i = 0; i<places.length; i++){
     addMarker(places[i]);
-    addRectangle(places[i]);
   }
 }
 

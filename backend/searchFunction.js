@@ -498,6 +498,5 @@ function addMarker(data) {
       infoWindow.open(map, marker)})
 }
 
-//this function clears all markers and info windows in the map
-
-//=init();
+//init is called everytime the web page laucnches
+init();

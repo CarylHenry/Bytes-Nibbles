@@ -23,7 +23,7 @@
     <div id ="form">
 
         <input type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
-        <select class="day search-item">
+        <select class="day search-item" id="weekday">
           <option value="-1">Select day</option>
           <option value="0">Sunday</option>
           <option value ="1">Monday</option>
@@ -33,8 +33,9 @@
           <option value ="5"> Friday </option>
           <option value ="6"> Saturday</option>
         </select>
-        <input class="time search-item" type="time" >
-        <input type= "submit" value="Search"  onclick="searchByName(); clearMarkers()">
+        <input class="time search-item" type="time" id="timeofday">
+        <input type= "submit" value="Search"  onclick="searchByName()">
+        <!--clearmarkers() removed-->
 
 
     </div>

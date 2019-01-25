@@ -368,18 +368,6 @@ function searchById(id) {
    method: 'GET',
    dataType: 'json',
    success: function(data){
-<<<<<<< HEAD
-
-     //if the place is not closed we add it on the map
-     if (data.is_closed == false) {
-      alert(data.name + " is opened now!");
-      addMarker(data);
-    }
-     else {
-       alert(data.name + " is closed and will open at " + data.hours[0].open[0].start);
-     }
-    }
-=======
     if (time == ""){
           if (data.is_closed == false) {
       alert(data.name + " is open now!");}
@@ -394,17 +382,8 @@ function searchById(id) {
         alert(data.name + " is closed and will open at " + data.hours[0].open[0].start)
       }
 
-  /*    else {
 
-      if (data.hours[0].open[0].start =< time && data.hours[0].open[0].end >= time) {
-      alert(data.name + " is open now!");}
-     else {
-        alert(data.name + " is closed and will open at " + data.hours[0].open[0].start);
-          }
-
-      } */
  }
->>>>>>> aaron
    });
 }
 

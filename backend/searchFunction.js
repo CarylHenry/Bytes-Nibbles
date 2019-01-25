@@ -370,6 +370,7 @@ function searchById(id) {
    success: function(data){
     if (time == ""){
           if (data.is_closed == false) {
+            addMarker(data);
       alert(data.name + " is open now!");}
      else {
        alert(data.name + " is closed and will open at " + data.hours.open[0].start);
@@ -377,6 +378,7 @@ function searchById(id) {
       }
       var bool1 = (data.hours[0].open[0].start <= time && data.hours[0].open[0].end >= time);
       if (bool1 == true){
+        addMarker(data);
       alert(data.name + " is open now!");}
       if (bool1 == false){
         alert(data.name + " is closed and will open at " + data.hours[0].open[0].start)

@@ -18,24 +18,27 @@
     </style>
   </head>
   <body>
-    <h1>Bytes and Nibbles</h1>
 
-    <div id ="form">
-
-        <input class="text-search search-item" type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
-        <select class="day-search search-item">
-          <option value="-1">Select day</option>
-          <option value="0">Sunday</option>
-          <option value ="1">Monday</option>
-          <option value ="2"> Tuesday</option>
-          <option value ="3"> Wednesday</option>
-          <option value ="4"> Thursday</option>
-          <option value ="5"> Friday </option>
-          <option value ="6"> Saturday</option>
-        </select>
-        <input class="time-search search-item" type="time" >
-        <input class="submit-search search-item" type="submit" value="Search"  onclick="searchByName()">
-
+    <div id="header">
+      <div id="title">
+        <h1>Bytes and Nibbles</h1>
+        <h2>Search for downtown Evanston restaurants</h2>
+      </div>
+      <div id ="form">
+          <input class="text-search search-item" type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
+          <select class="day-search search-item">
+            <option value="-1">Select day</option>
+            <option value="0">Sunday</option>
+            <option value ="1">Monday</option>
+            <option value ="2"> Tuesday</option>
+            <option value ="3"> Wednesday</option>
+            <option value ="4"> Thursday</option>
+            <option value ="5"> Friday </option>
+            <option value ="6"> Saturday</option>
+          </select>
+          <input class="time-search search-item" type="time" >
+          <input class="submit-search search-item" type="submit" value="Search"  onclick="searchByName()">
+      </div>
     </div>
 
     <div id="map"></div>

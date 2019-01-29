@@ -222,8 +222,7 @@ var mapQualities = {
 };
     var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
     map = evanston;
-
-
+    map.addListener('click', function(){removeInfoWindows()});
 
 }
 
@@ -275,7 +274,7 @@ function initHelper(url){
 function searchByName() {
 
   //for every new search remove all markers and infoWindows from previous search
-
+  clearMarkers();
   // Get search value form html
   var q = document.getElementById("search").value;
   //Gnerate URL to call the api
@@ -368,7 +367,7 @@ function searchById(id) {
    method: 'GET',
    dataType: 'json',
    success: function(data){
-    if (time == ""){
+    if (time == "" || date == -1){
           if (data.is_closed == false) {
             addMarker(data);
       alert(data.name + " is open now!");}
@@ -376,13 +375,15 @@ function searchById(id) {
        alert(data.name + " is closed and will open at " + data.hours.open[0].start);
           }
       }
-      var bool1 = (data.hours[0].open[0].start <= time && data.hours[0].open[0].end >= time);
+    else {
+      var bool1 = (data.hours[0].open[date].start <= time && data.hours[0].open[date].end >= time);
       if (bool1 == true){
         addMarker(data);
       alert(data.name + " is open now!");}
       if (bool1 == false){
-        alert(data.name + " is closed and will open at " + data.hours[0].open[0].start)
+        alert(data.name + " is closed and will open at " + data.hours[0].open[date].start)
       }
+    }
 
 
  }
@@ -507,6 +508,21 @@ function addMarker(data) {
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close
     marker.addListener('click', function(){
       infoWindow.open(map, marker)})
+
+
+}
+
+function removeInfoWindows() {
+  for(var i = 0; i<infoWindows.length; i++){
+    infoWindows[i].close();}
+  infoWindows = [];
+}
+
+function clearMarkers(){
+   markers.forEach(function(marker) {
+     marker.setMap(null);
+   });
+   markers = [];
 }
 
 //init is called everytime the web page laucnches

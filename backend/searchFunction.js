@@ -369,11 +369,12 @@ function searchById(id) {
    dataType: 'json',
    success: function(data){
     if (time == "" || date == -1){
-          if (data.is_closed == false) {
+          bool = data.hours[0].is_open_now;
+          if (bool == true ) {
             addMarker(data);
-      alert(data.name + " is open now!");}
-     else {
-       alert(data.name + " is closed and will open at " + data.hours.open[0].start);
+            alert(data.name + " is open now!");}
+          else {
+            alert(data.name + " is closed right now");
           }
       }
     else {
@@ -398,7 +399,7 @@ function searchById(id) {
       });
       if (bool1 == true){
         addMarker(data);
-      alert(data.name + " is open now!");}
+        alert(data.name + " is open now!");}
       if (bool1 == false){
         var disp = "";
         alert(openTimes[0]);

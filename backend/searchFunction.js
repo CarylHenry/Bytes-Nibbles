@@ -1,5 +1,8 @@
 //Gloabl variable for map
 var map;
+//These two arrays correspond to all markers and inforWindows shown on the map
+var markers = [];
+var infoWindows = [];
 
 function displayMap() {
 
@@ -222,9 +225,9 @@ var mapQualities = {
 };
     var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
     map = evanston;
-    map.addListener('click', function(){removeInfoWindows()});
 
 }
+
 
 //init function called at the start of the launch
 //this calls the api to check for currently opened busniesses and shows them on the map
@@ -345,9 +348,7 @@ function searchByName() {
 //         }
 //     ]
 
-//These two arrays correspond to all markers and inforWindows shown on the map
-var markers = [];
-var infoWindows = [];
+
 //This function takes the businesses ids generated from the previous searchFunction
 //and utilizes the businesse object to
 //1, draw the location on the map
@@ -546,14 +547,11 @@ function addMarker(data) {
     marker.addListener('click', function(){
       infoWindow.open(map, marker)})
 
-
+    map.addListener('click', function(){
+        infoWindow.close();});
 }
 
-function removeInfoWindows() {
-  for(var i = 0; i<infoWindows.length; i++){
-    infoWindows[i].close();}
-  infoWindows = [];
-}
+
 
 function clearMarkers(){
    markers.forEach(function(marker) {

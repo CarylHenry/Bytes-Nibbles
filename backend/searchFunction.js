@@ -1,5 +1,8 @@
 //Gloabl variable for map
 var map;
+//These two arrays correspond to all markers and inforWindows shown on the map
+var markers = [];
+var infoWindows = [];
 
 function displayMap() {
 
@@ -222,9 +225,9 @@ var mapQualities = {
 };
     var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
     map = evanston;
-    map.addListener('click', function(){removeInfoWindows()});
 
 }
+
 
 //init function called at the start of the launch
 //this calls the api to check for currently opened busniesses and shows them on the map
@@ -345,9 +348,7 @@ function searchByName() {
 //         }
 //     ]
 
-//These two arrays correspond to all markers and inforWindows shown on the map
-var markers = [];
-var infoWindows = [];
+
 //This function takes the businesses ids generated from the previous searchFunction
 //and utilizes the businesse object to
 //1, draw the location on the map
@@ -355,8 +356,9 @@ var infoWindows = [];
 // The structure of the businesse object is shown below the funtion
 function searchById(id) {
   // this is the same api call from avbe except the search is now a id search
-   var date = document.getElementById("weekday").value;
+   var d = document.getElementById("weekday").value;
    var time = document.getElementById("timeofday").value;
+   var date = parseInt(d, 10);
    time = "" + time.substring(0,2) + time.substring(time.length-2,time.length);
    var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + id;
    $.ajax({
@@ -368,20 +370,56 @@ function searchById(id) {
    dataType: 'json',
    success: function(data){
     if (time == "" || date == -1){
-          if (data.is_closed == false) {
+          bool = data.hours[0].is_open_now;
+          if (bool == true ) {
             addMarker(data);
-      alert(data.name + " is open now!");}
-     else {
-       alert(data.name + " is closed and will open at " + data.hours.open[0].start);
+            alert(data.name + " is open now!");}
+          else {
+            alert(data.name + " is closed right now");
           }
       }
     else {
-      var bool1 = (data.hours[0].open[date].start <= time && data.hours[0].open[date].end >= time);
+      var bool1 = false;
+      var openTimes = [];
+      var closeTimes = [];
+      var openTimesTmr = [];
+      data.hours[0].open.forEach(function(open){
+          if (!bool1){
+
+            var day = open.day
+            if (day == date) {
+                bool1 = open.start <= time && open.end >= time;
+                openTimes.push(open.start);
+                closeTimes.push(open.end);
+
+            }
+            if (day == (date + 1) % 7) {
+              openTimesTmr.push(open.start);
+            }
+          }
+      });
       if (bool1 == true){
         addMarker(data);
-      alert(data.name + " is open now!");}
+        alert(data.name + " is open now!");}
       if (bool1 == false){
-        alert(data.name + " is closed and will open at " + data.hours[0].open[date].start)
+        var disp = "";
+        alert(openTimes[0]);
+        if (openTimes == ""){adisp = openTimesTmr[0]}
+        else if (time > closeTimes[closeTimes.length -1])
+        { if (openTimesTmr == ""){disp = " is closed tommorrow";}
+          else {disp = openTimesTmr[0]}
+        }
+        else if (time < openTimes[0]){disp = openTimes[0]}
+        else {
+          var i = 1;
+          while(disp == ""){
+            if (time < openTimes[i]){
+              disp = openTimes[i];
+            }
+            i = i + 1;
+          }
+        }
+        alert(data.name + " is closed and will open at " + disp)
       }
     }
 
@@ -509,14 +547,11 @@ function addMarker(data) {
     marker.addListener('click', function(){
       infoWindow.open(map, marker)})
 
-
+    map.addListener('click', function(){
+        infoWindow.close();});
 }
 
-function removeInfoWindows() {
-  for(var i = 0; i<infoWindows.length; i++){
-    infoWindows[i].close();}
-  infoWindows = [];
-}
+
 
 function clearMarkers(){
    markers.forEach(function(marker) {

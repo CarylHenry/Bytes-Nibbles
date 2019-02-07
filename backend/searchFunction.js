@@ -403,8 +403,7 @@ function searchById(id) {
         alert(data.name + " is open now!");}
       if (bool1 == false){
         var disp = "";
-        alert(openTimes[0]);
-        if (openTimes == ""){adisp = openTimesTmr[0]}
+        if (openTimes == ""){disp = openTimesTmr[0]}
         else if (time > closeTimes[closeTimes.length -1])
         { if (openTimesTmr == ""){disp = " is closed tommorrow";}
           else {disp = openTimesTmr[0]}

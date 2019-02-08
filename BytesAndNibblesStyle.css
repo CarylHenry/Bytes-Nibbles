@@ -1,15 +1,14 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
- @import url(https://fonts.googleapis.com/css?family=Skranji );
  @import url(https://fonts.googleapis.com/css?family=Roboto);
  @font-face {
-   font-family: 'Skranji', 'Roboto';
-   src: url(https://fonts.googleapis.com/css?family=Skranji);
+   font-family: 'Roboto';
    src: url(https://fonts.googleapis.com/css?family=Roboto);
  }
 
 
  body{
+<<<<<<< HEAD
    background-image: url("3.jpg");
    background-size: 100% 70%;
    background-repeat: no-repeat;
@@ -19,37 +18,83 @@
  }
 
  .title{
+=======
+   height: 100%;
+   margin: auto;
+   /* background-color: #d6d6d6; */
+   background-image: url("food_pattern.jpg");
+   padding-left: 7.5%;
+   padding-right: 7.5%;
+ }
+
+ #header{
+   font-family: 'Roboto', sans-serif;
+
+   color: white;
+   border-radius: 20px;
+   background-color: #ce2b2e;
+
+   margin-top: 80px;
+   margin-bottom: 60px;
+ }
+
+ #title{
+>>>>>>> Front-End
    text-align: center;
    text-transform: uppercase;
    letter-spacing: .2em;
+<<<<<<< HEAD
    font-size: 150%;
    font-family: 'Skranji', sans-serif;
    color: white;
    margin-top: 15%;
    position: relative;
    text-shadow: 6px 6px 5px black;
+=======
+   padding-top: 40px;
+ }
+
+ h1{
+   font-size: 3.2em;
+   margin-bottom: 0px;
+   margin: 5px;
+ }
+
+ h2{
+   font-weight: lighter;
+   margin-top: 0px;
+ }
+>>>>>>> Front-End
 
   }
   
 
 #form{
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-bottom: 18%;
 
+<<<<<<< HEAD
 
 }
 
 #form :focus {
   background-color: rgb(250, 250, 210);
   
+=======
+  width: 100%;
+  padding-bottom: 40px;
+>>>>>>> Front-End
 }
 
 .search-item{
-  height: 25px;
+  height: 40px;
   border: none;
   border-radius: 5px;
+<<<<<<< HEAD
   
   text-align: left;
   margin: 1%;
@@ -72,13 +117,62 @@
 
 .search{
   width: 4%;
+=======
+  text-align: center;
+  margin: 10px;
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.text-search{
+  opacity: 1;
+  width: 300px;
+  text-align: left;
+  padding-left: 1%;
+}
+
+.day-search{
+  width: 110px;
+}
+
+.time-search{
+  width: 100px;
+}
+
+.submit-search{
+  width: 80px;
+}
+
+@media (min-width: 800px){
+  .text-search{
+    width: 30%;
+  }
+
+  .day-search{
+    width: 15%;
+  }
+
+  .time-search{
+    width: 10%;
+  }
+
+  .submit-search{
+    width: 10%;
+  }
+>>>>>>> Front-End
 }
 
 
 
 #map {
   height: 100%;
+<<<<<<< HEAD
   margin-bottom: 5%;
   border-radius: 5%;
 
+=======
+  margin-bottom: 80px;
+  border-radius: 50px;
+  border: 30px solid #245b96;
+>>>>>>> Front-End
 }

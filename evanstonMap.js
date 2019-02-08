@@ -1,4 +1,3 @@
-
 function initMap() {
 
 //What the map centers on + user controls for display

@@ -8,17 +8,6 @@
 
 
  body{
-<<<<<<< HEAD
-   background-image: url("3.jpg");
-   background-size: 100% 70%;
-   background-repeat: no-repeat;
-   background-color: rgba(255, 255, 255, 0.3);
-   background-blend-mode: lighten;
-
- }
-
- .title{
-=======
    height: 100%;
    margin: auto;
    /* background-color: #d6d6d6; */
@@ -39,18 +28,9 @@
  }
 
  #title{
->>>>>>> Front-End
    text-align: center;
    text-transform: uppercase;
    letter-spacing: .2em;
-<<<<<<< HEAD
-   font-size: 150%;
-   font-family: 'Skranji', sans-serif;
-   color: white;
-   margin-top: 15%;
-   position: relative;
-   text-shadow: 6px 6px 5px black;
-=======
    padding-top: 40px;
  }
 
@@ -64,10 +44,9 @@
    font-weight: lighter;
    margin-top: 0px;
  }
->>>>>>> Front-End
 
   }
-  
+
 
 #form{
   display: flex;
@@ -77,47 +56,14 @@
   align-items: center;
   margin-bottom: 18%;
 
-<<<<<<< HEAD
-
-}
-
-#form :focus {
-  background-color: rgb(250, 250, 210);
-  
-=======
   width: 100%;
   padding-bottom: 40px;
->>>>>>> Front-End
 }
 
 .search-item{
   height: 40px;
   border: none;
   border-radius: 5px;
-<<<<<<< HEAD
-  
-  text-align: left;
-  margin: 1%;
-  background-color: white;
-  font-family: 'Roboto', sans-serif;
-}
-
-.search-bar {
-  width: 30%;
-}
-
-.day{
-  width: 20%;
-
-}
-
-.time{
-  width: 15%;
-}
-
-.search{
-  width: 4%;
-=======
   text-align: center;
   margin: 10px;
   background-color: white;
@@ -159,20 +105,13 @@
   .submit-search{
     width: 10%;
   }
->>>>>>> Front-End
 }
 
 
 
 #map {
   height: 100%;
-<<<<<<< HEAD
-  margin-bottom: 5%;
-  border-radius: 5%;
-
-=======
   margin-bottom: 80px;
   border-radius: 50px;
   border: 30px solid #245b96;
->>>>>>> Front-End
 }

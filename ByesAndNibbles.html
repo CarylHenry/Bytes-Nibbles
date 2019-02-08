@@ -26,8 +26,34 @@
       }
     </style>
   </head>
-
+  
   <body>
+<<<<<<< HEAD
+    <div class="upper">
+      <div class="title">
+        <h1>Bytes and Nibbles</h1>
+      </div>
+      <div id ="form">
+
+          <input type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
+          <select class="day search-item" id="weekday">
+            <option value="-1">Select day</option>
+            <option value="6">Sunday</option>
+            <option value ="0">Monday</option>
+            <option value ="1"> Tuesday</option>
+            <option value ="2"> Wednesday</option>
+            <option value ="3"> Thursday</option>
+            <option value ="4"> Friday </option>
+            <option value ="5"> Saturday</option>
+          </select>
+          <input class="time search-item" type="time" id="timeofday">
+          <i class="material-icons">search</i>
+          <input class="search search-item" type= "submit" value='search'  onclick="searchByName()">
+
+
+          <!--clearmarkers() removed-->
+
+=======
 
     <div id="header">
       <div id="title">
@@ -36,7 +62,7 @@
       </div>
       <div id ="form">
           <input class="text-search search-item" type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
-          <select class="day-search search-item" id="weekday">
+          <select class="day-search search-item">
             <option value="-1">Select day</option>
             <option value="0">Sunday</option>
             <option value ="1">Monday</option>
@@ -46,12 +72,19 @@
             <option value ="5"> Friday </option>
             <option value ="6"> Saturday</option>
           </select>
-          <input class="time-search search-item" type="time" id="timeofday">
+          <input class="time-search search-item" type="time" >
           <input class="submit-search search-item" type="submit" value="Search"  onclick="searchByName()">
+>>>>>>> Front-End
       </div>
     </div>
 
     <div id="map"></div>
+<<<<<<< HEAD
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7rnhLtJ2YGbv5_FFqW8bpCpp002qkFDo&callback=displayMap&libraries=places"
+    async defer></script>
+
+=======
+>>>>>>> Front-End
 
   </body>
 

@@ -108,6 +108,6 @@
 #map {
   height: 100%;
   margin-bottom: 80px;
-  border-radius: 5%;
-  border: 20px solid #245b96;
+  border-radius: 50px;
+  border: 30px solid #245b96;
 }

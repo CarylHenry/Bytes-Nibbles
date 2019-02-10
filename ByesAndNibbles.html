@@ -26,16 +26,19 @@
       }
     </style>
   </head>
-  
+
   <body>
-    <div class="upper">
-      <div class="title">
+    <div id="header">
+      
+      <div id="title">
         <h1>Bytes and Nibbles</h1>
+        <h2>Search for downtown Evanston restaurants</h2>
       </div>
+
       <div id ="form">
 
-          <input type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
-          <select class="day search-item" id="weekday">
+          <input type="text" name="search" value = "" id="search" class="text-search search-item input-field" required placeholder="Search for restaurant">
+          <select class="day-search search-item" id="weekday">
             <option value="-1">Select day</option>
             <option value="6">Sunday</option>
             <option value ="0">Monday</option>
@@ -45,14 +48,12 @@
             <option value ="4"> Friday </option>
             <option value ="5"> Saturday</option>
           </select>
-          <input class="time search-item" type="time" id="timeofday">
+          <input class="time-search search-item" type="time" id="timeofday">
           <i class="material-icons">search</i>
-          <input class="search search-item" type= "submit" value='search'  onclick="searchByName()">
-
-
+          <input class="submit-search search-item" type= "submit" value='search'  onclick="searchByName()">
           <!--clearmarkers() removed-->
-
       </div>
+
     </div>
 
     <div id="map"></div>

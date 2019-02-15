@@ -238,12 +238,12 @@ function init() {
   //Here we are calling for results 0 - 49
   var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&radius=2000" ;
   initHelper(myurl);
-  //Here we are calling for results 50 - 99
-  var myurl2 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=50&radius=2000" ;
-  initHelper(myurl2);
-  //Here we are calling for result 100 - 149
-  var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
-  initHelper(myurl3);
+  // //Here we are calling for results 50 - 99
+  // var myurl2 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=50&radius=2000" ;
+  // initHelper(myurl2);
+  // //Here we are calling for result 100 - 149
+  // var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
+  // initHelper(myurl3);
 
 }
 //the intHelper helps us call the yelp api in the init function
@@ -542,7 +542,7 @@ function addMarker(data) {
     markers.push(marker);
 //make a new info window with this page
     var infoWindow=new google.maps.InfoWindow({
-      content: '<a href= "'+ url + '">'+ name + '</a>'});
+      content: '<a href= "'+ url + '" target="_blank">'+ name + '</a>'});
 //push it into the infowindow array
     infoWindows.push(infoWindow);
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close

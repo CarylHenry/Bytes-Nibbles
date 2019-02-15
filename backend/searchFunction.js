@@ -307,9 +307,9 @@ function searchByName() {
      var id = data.businesses[i].id;
      var name = data.businesses[i].name;
      if (name != 'LA Fitness'){
-     test.push(name);}
+     test.push(name);
      //alert("found " + name);
-     searchById(id);
+     searchById(id);}
    }
    }
   });

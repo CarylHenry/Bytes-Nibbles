@@ -306,7 +306,8 @@ function searchByName() {
      for (i; i < data.businesses.length; i++){
      var id = data.businesses[i].id;
      var name = data.businesses[i].name;
-     test.push(name);
+     if (name != 'LA Fitness'){
+     test.push(name);}
      //alert("found " + name);
      searchById(id);
    }

@@ -3,6 +3,8 @@ var map;
 //These two arrays correspond to all markers and inforWindows shown on the map
 var markers = [];
 var infoWindows = [];
+var test = [];
+
 
 function displayMap() {
 
@@ -295,6 +297,7 @@ function searchByName() {
   },
   method: 'GET',
   dataType: 'json',
+  async: false,
   success: function(data){
      if(data.businesses == ""){
        //alert("no result found");
@@ -304,11 +307,32 @@ function searchByName() {
      for (i; i < data.businesses.length; i++){
      var id = data.businesses[i].id;
      var name = data.businesses[i].name;
+     test.push(name);
      //alert("found " + name);
      searchById(id);
    }
    }
   });
+
+  var len = test.length;
+  var i = 0;
+
+  var output;
+  if (len == 1){
+  output = len + " restaraunt found:\n";}
+
+  else if (len >= 2){
+  output = len + " restaraunts found:\n";}
+
+  else {
+  output = "nothing found";
+  }
+
+  for (i; i < len; i ++){
+    output = output + test[i] + '\n';
+  }
+  alert(output);
+  test = [];
 }
 // This what the returned structure for autocomplete search
 // In our search we are utilizing the IDs returned in theBUSNIESSES array that gives us returned lists of name

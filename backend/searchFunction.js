@@ -3,8 +3,14 @@ var map;
 //These two arrays correspond to all markers and inforWindows shown on the map
 var markers = [];
 var infoWindows = [];
+//the test array is an array of names of the restuarants found updated at every search
 var test = [];
-
+//the coords array is an array of arrays that represent locations
+//the coords at a certain index of the array
+//corresponds to the location of the restaurant
+//whoose nameis in test with the same index
+//in the second level array, first element lat, second element lng
+var coords = [];
 var mapQualities = {
     center: {lat: 42.047719, lng: -87.683712},
     zoom: 16.3,
@@ -247,7 +253,7 @@ function init() {
   // var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
   // initHelper(myurl3);
 
-        
+
 }
 //the intHelper helps us call the yelp api in the init function
 function initHelper(url){
@@ -308,7 +314,6 @@ function searchByName() {
      var id = data.businesses[i].id;
      var name = data.businesses[i].name;
      if (name != 'LA Fitness'){
-     test.push(name);
      //alert("found " + name);
      searchById(id);}
    }
@@ -332,7 +337,10 @@ function searchByName() {
   for (i; i < len; i ++){
     output = output + test[i] + '\n';
   }
+  //tests 
   alert(output);
+  alert(coords);
+  coords = [];
   test = [];
 }
 // This what the returned structure for autocomplete search
@@ -394,7 +402,9 @@ function searchById(id) {
    },
    method: 'GET',
    dataType: 'json',
+   async: false,
    success: function(data){
+
     if (time == "" || date == -1){
           bool = data.hours[0].is_open_now;
           if (bool == true ) {
@@ -426,15 +436,17 @@ function searchById(id) {
       });
       if (bool1 == true){
         addMarker(data);
+        test.push(data.name);
+        coords.push([data.coordinates.latitude, data.coordinates.longitude])
         //alert(data.name + " is open now!");
       }
 
       var la=data.coordinates.latitude;
       var lo= data.coordinates.longitude;
-      var center = {lat: la, lng: lo}; 
+      var center = {lat: la, lng: lo};
       map.setCenter(center);
       map.setZoom(17);
-  
+
 
 
       // if (bool1 == false){

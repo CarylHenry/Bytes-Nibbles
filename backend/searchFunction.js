@@ -270,7 +270,7 @@ function initHelper(url){
         totalOpened = totalresults;
         var i = 0;
         for (i; i < totalresults; i++) {
-          addMarker(data.businesses[i]);
+          addMarkers(data.businesses[i]);
         }
       }
       else {
@@ -337,7 +337,7 @@ function searchByName() {
   for (i; i < len; i ++){
     output = output + test[i] + '\n';
   }
-  //tests 
+  //tests
   alert(output);
   alert(coords);
   coords = [];
@@ -593,6 +593,31 @@ function addMarker(data) {
 //push it into the infowindow array
     infoWindows.push(infoWindow);
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close
+    infoWindow.open(map, marker);
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker)})
+
+    map.addListener('click', function(){
+        infoWindow.close();});
+}
+
+function addMarkers(data) {
+    var name = data.name;
+    var url = data.url
+    var coords = {lat: data.coordinates.latitude,lng: data.coordinates.longitude};
+//add a new marker object
+    var marker = new google.maps.Marker({
+      position: coords,
+      map: map
+    });
+//push this marker in the markers array
+    markers.push(marker);
+//make a new info window with this page
+    var infoWindow=new google.maps.InfoWindow({
+      content: '<a href= "'+ url + '" target="_blank">'+ name + '</a>'});
+//push it into the infowindow array
+    infoWindows.push(infoWindow);
+//make it so the infoWindow pops up when you click the marker and all other infoWindows close
     marker.addListener('click', function(){
       infoWindow.open(map, marker)})
 
@@ -608,8 +633,6 @@ function clearMarkers(){
    });
    markers = [];
 }
-
-
 
 //init is called everytime the web page laucnches
 init();

@@ -6,7 +6,18 @@
     <meta charset="utf-8">
     <link href="BytesAndNibblesStyle.css" rel="stylesheet" type="text/css">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+<!--
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script> -->
+
+
+
     <script type ="text/javascript" href="backend/searchFunction.js">
+    
+
     </script>
 
     <style>
@@ -17,26 +28,33 @@
       }
     </style>
   </head>
+
   <body>
-    <h1>Bytes and Nibbles</h1>
+    <div id="header">
+      
+      <div id="title">
+        <h1>Bytes and Nibbles</h1>
+        <h2>Search for downtown Evanston restaurants</h2>
+      </div>
 
-    <div id ="form">
+      <div id ="form">
 
-        <input type="text" name="search" value = "" id="search" class="search-bar search-item input-field" required placeholder="Search for restaurant">
-        <select class="day search-item" id="weekday">
-          <option value="-1">Select day</option>
-          <option value="6">Sunday</option>
-          <option value ="0">Monday</option>
-          <option value ="1"> Tuesday</option>
-          <option value ="2"> Wednesday</option>
-          <option value ="3"> Thursday</option>
-          <option value ="4"> Friday </option>
-          <option value ="5"> Saturday</option>
-        </select>
-        <input class="time search-item" type="time" id="timeofday">
-        <input type= "submit" value="Search"  onclick="searchByName()">
-        <!--clearmarkers() removed-->
-
+          <input type="text" name="search" value = "" id="search" class="text-search search-item input-field" required placeholder="Search for restaurant">
+          <select class="day-search search-item" id="weekday">
+            <option value="-1">Select day</option>
+            <option value="6">Sunday</option>
+            <option value ="0">Monday</option>
+            <option value ="1"> Tuesday</option>
+            <option value ="2"> Wednesday</option>
+            <option value ="3"> Thursday</option>
+            <option value ="4"> Friday </option>
+            <option value ="5"> Saturday</option>
+          </select>
+          <input class="time-search search-item" type="time" id="timeofday" value="18:00">
+          <i class="material-icons">search</i>
+          <input class="submit-search search-item" type= "submit" value='search'  onclick="searchByName()">
+          <!--clearmarkers() removed-->
+      </div>
 
     </div>
 
@@ -50,5 +68,22 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
   <script src = backend/searchFunction.js>
 
+  </script>
+  <script type="text/javascript">
+   var d = new Date();
+   var curr_hour = d.getHours();
+   var curr_min = d.getMinutes();
+   var day=d.getDay();
+   if (day == 0) {day = 6}
+   else {day -=1; }
+
+   function addZero(i) {
+    if (i < 10) { i = "0" + i;}
+    return i;
+  }
+   var time= ''+addZero(curr_hour) +":" + addZero(curr_min) +''; 
+   document.getElementById("timeofday").value = time;
+   var weekday = new Array(7);
+   document.getElementById("weekday").value = day; 
   </script>
 </html>

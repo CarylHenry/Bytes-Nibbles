@@ -50,7 +50,7 @@
             <option value ="4"> Friday </option>
             <option value ="5"> Saturday</option>
           </select>
-          <input class="time-search search-item" type="time" id="timeofday" value="12:00">
+          <input class="time-search search-item" type="time" id="timeofday" value="18:00">
           <i class="material-icons">search</i>
           <input class="submit-search search-item" type= "submit" value='search'  onclick="searchByName()">
           <!--clearmarkers() removed-->
@@ -73,7 +73,17 @@
    var d = new Date();
    var curr_hour = d.getHours();
    var curr_min = d.getMinutes();
-   var time= ''+curr_hour +":" + curr_min +''; 
+   var day=d.getDay();
+   if (day == 0) {day = 6}
+   else {day -=1; }
+
+   function addZero(i) {
+    if (i < 10) { i = "0" + i;}
+    return i;
+  }
+   var time= ''+addZero(curr_hour) +":" + addZero(curr_min) +''; 
    document.getElementById("timeofday").value = time;
+   var weekday = new Array(7);
+   document.getElementById("weekday").value = day; 
   </script>
 </html>

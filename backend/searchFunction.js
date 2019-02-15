@@ -531,6 +531,7 @@ function searchById(id) {
 
 function addMarker(data) {
     var name = data.name;
+    var url = data.url
     var coords = {lat: data.coordinates.latitude,lng: data.coordinates.longitude};
 //add a new marker object
     var marker = new google.maps.Marker({
@@ -541,7 +542,7 @@ function addMarker(data) {
     markers.push(marker);
 //make a new info window with this page
     var infoWindow=new google.maps.InfoWindow({
-      content: name});
+      content: '<a href= "'+ url + '">'+ name + '</a>'});
 //push it into the infowindow array
     infoWindows.push(infoWindow);
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close

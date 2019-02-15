@@ -245,6 +245,7 @@ function init() {
   var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
   initHelper(myurl3);
 
+        
 }
 //the intHelper helps us call the yelp api in the init function
 function initHelper(url){
@@ -561,6 +562,8 @@ function clearMarkers(){
    });
    markers = [];
 }
+
+
 
 //init is called everytime the web page laucnches
 init();

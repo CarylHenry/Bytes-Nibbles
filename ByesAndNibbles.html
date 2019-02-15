@@ -16,6 +16,8 @@
 
 
     <script type ="text/javascript" href="backend/searchFunction.js">
+    
+
     </script>
 
     <style>
@@ -48,7 +50,7 @@
             <option value ="4"> Friday </option>
             <option value ="5"> Saturday</option>
           </select>
-          <input class="time-search search-item" type="time" id="timeofday">
+          <input class="time-search search-item" type="time" id="timeofday" value="12:00">
           <i class="material-icons">search</i>
           <input class="submit-search search-item" type= "submit" value='search'  onclick="searchByName()">
           <!--clearmarkers() removed-->
@@ -66,5 +68,12 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
   <script src = backend/searchFunction.js>
 
+  </script>
+  <script type="text/javascript">
+   var d = new Date();
+   var curr_hour = d.getHours();
+   var curr_min = d.getMinutes();
+   var time= ''+curr_hour +":" + curr_min +''; 
+   document.getElementById("timeofday").value = time;
   </script>
 </html>

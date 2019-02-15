@@ -265,7 +265,7 @@ function initHelper(url){
         }
       }
       else {
-        alert("no results found");
+        //alert("no results found");
       }
      }
    });
@@ -296,14 +296,14 @@ function searchByName() {
   dataType: 'json',
   success: function(data){
      if(data.businesses == ""){
-       alert("no result found");
+       //alert("no result found");
        return;
      }
      var i = 0;
      for (i; i < data.businesses.length; i++){
      var id = data.businesses[i].id;
      var name = data.businesses[i].name;
-     alert("found " + name);
+     //alert("found " + name);
      searchById(id);
    }
    }
@@ -373,9 +373,9 @@ function searchById(id) {
           bool = data.hours[0].is_open_now;
           if (bool == true ) {
             addMarker(data);
-            alert(data.name + " is open now!");}
-          else {
-            alert(data.name + " is closed right now");
+            //alert(data.name + " is open now!");}
+          //else {
+            //alert(data.name + " is closed right now");
           }
       }
     else {
@@ -400,26 +400,28 @@ function searchById(id) {
       });
       if (bool1 == true){
         addMarker(data);
-        alert(data.name + " is open now!");}
-      if (bool1 == false){
-        var disp = "";
-        if (openTimes == ""){disp = openTimesTmr[0]}
-        else if (time > closeTimes[closeTimes.length -1])
-        { if (openTimesTmr == ""){disp = " is closed tommorrow";}
-          else {disp = openTimesTmr[0]}
-        }
-        else if (time < openTimes[0]){disp = openTimes[0]}
-        else {
-          var i = 1;
-          while(disp == ""){
-            if (time < openTimes[i]){
-              disp = openTimes[i];
-            }
-            i = i + 1;
-          }
-        }
-        alert(data.name + " is closed and will open at " + disp)
+        //alert(data.name + " is open now!");
       }
+      // if (bool1 == false){
+      //   var disp = "";
+      //   //(openTimes[0]);
+      //   if (openTimes == ""){adisp = openTimesTmr[0]}
+      //   else if (time > closeTimes[closeTimes.length -1])
+      //   { if (openTimesTmr == ""){disp = " is closed tommorrow";}
+      //     else {disp = openTimesTmr[0]}
+      //   }
+      //   else if (time < openTimes[0]){disp = openTimes[0]}
+      //   else {
+      //     var i = 1;
+      //     while(disp == ""){
+      //       if (time < openTimes[i]){
+      //         disp = openTimes[i];
+      //       }
+      //       i = i + 1;
+      //     }
+      //   }
+      //   //alert(data.name + " is closed and will open at " + disp)
+      // }
     }
 
 
@@ -529,6 +531,7 @@ function searchById(id) {
 
 function addMarker(data) {
     var name = data.name;
+    var url = data.url
     var coords = {lat: data.coordinates.latitude,lng: data.coordinates.longitude};
 //add a new marker object
     var marker = new google.maps.Marker({
@@ -539,7 +542,7 @@ function addMarker(data) {
     markers.push(marker);
 //make a new info window with this page
     var infoWindow=new google.maps.InfoWindow({
-      content: name});
+      content: '<a href= "'+ url + '">'+ name + '</a>'});
 //push it into the infowindow array
     infoWindows.push(infoWindow);
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close

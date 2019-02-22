@@ -4,12 +4,6 @@ var map;
 var markers = [];
 var infoWindows = [];
 var test = [];
-
-
-function displayMap() {
-
-//What area the map displays
-//What the map centers on + user controls for display
 var mapQualities = {
   center: {lat: 42.047719, lng: -87.683712},
   zoom: 16.3,
@@ -225,6 +219,12 @@ var mapQualities = {
     }
   ]
 };
+
+
+function displayMap() {
+
+//What area the map displays
+//What the map centers on + user controls for display
     var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
     map = evanston;
 
@@ -246,7 +246,7 @@ function init() {
   // //Here we are calling for result 100 - 149
   // var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
   // initHelper(myurl3);
-
+  displayMap();
         
 }
 //the intHelper helps us call the yelp api in the init function
@@ -427,6 +427,11 @@ function searchById(id) {
         addMarker(data);
         //alert(data.name + " is open now!");
       }
+      var la=data.coordinates.latitude;
+      var lo= data.coordinates.longitude;
+      var center = {lat: la, lng: lo}; 
+      map.setCenter(center);
+      map.setZoom(17);
       // if (bool1 == false){
       //   var disp = "";
       //   //(openTimes[0]);

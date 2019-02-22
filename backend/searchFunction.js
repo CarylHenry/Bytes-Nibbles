@@ -3,7 +3,9 @@ var map;
 //These two arrays correspond to all markers and inforWindows shown on the map
 var markers = [];
 var infoWindows = [];
+//the test array is an array of names of the restuarants found updated at every search
 var test = [];
+var coords = [];
 var mapQualities = {
   center: {lat: 42.047719, lng: -87.683712},
   zoom: 16.3,
@@ -247,7 +249,7 @@ function init() {
   // var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
   // initHelper(myurl3);
   displayMap();
-        
+
 }
 //the intHelper helps us call the yelp api in the init function
 function initHelper(url){
@@ -264,7 +266,7 @@ function initHelper(url){
         totalOpened = totalresults;
         var i = 0;
         for (i; i < totalresults; i++) {
-          addMarker(data.businesses[i]);
+          addMarkers(data.businesses[i]);
         }
       }
       else {
@@ -307,9 +309,9 @@ function searchByName() {
      for (i; i < data.businesses.length; i++){
      var id = data.businesses[i].id;
      var name = data.businesses[i].name;
-     test.push(name);
+     if (name != 'LA Fitness'){
      //alert("found " + name);
-     searchById(id);
+     searchById(id);}
    }
    }
   });
@@ -331,7 +333,10 @@ function searchByName() {
   for (i; i < len; i ++){
     output = output + test[i] + '\n';
   }
+  //tests
   alert(output);
+  alert(coords);
+  coords = [];
   test = [];
 }
 // This what the returned structure for autocomplete search
@@ -393,7 +398,9 @@ function searchById(id) {
    },
    method: 'GET',
    dataType: 'json',
+   async: false,
    success: function(data){
+
     if (time == "" || date == -1){
           bool = data.hours[0].is_open_now;
           if (bool == true ) {
@@ -425,13 +432,18 @@ function searchById(id) {
       });
       if (bool1 == true){
         addMarker(data);
+        test.push(data.name);
+        coords.push([data.coordinates.latitude, data.coordinates.longitude])
         //alert(data.name + " is open now!");
       }
       var la=data.coordinates.latitude;
       var lo= data.coordinates.longitude;
-      var center = {lat: la, lng: lo}; 
+      var center = {lat: la, lng: lo};
       map.setCenter(center);
       map.setZoom(17);
+
+
+
       // if (bool1 == false){
       //   var disp = "";
       //   //(openTimes[0]);
@@ -576,6 +588,31 @@ function addMarker(data) {
 //push it into the infowindow array
     infoWindows.push(infoWindow);
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close
+    infoWindow.open(map, marker);
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker)})
+
+    map.addListener('click', function(){
+        infoWindow.close();});
+}
+
+function addMarkers(data) {
+    var name = data.name;
+    var url = data.url
+    var coords = {lat: data.coordinates.latitude,lng: data.coordinates.longitude};
+//add a new marker object
+    var marker = new google.maps.Marker({
+      position: coords,
+      map: map
+    });
+//push this marker in the markers array
+    markers.push(marker);
+//make a new info window with this page
+    var infoWindow=new google.maps.InfoWindow({
+      content: '<a href= "'+ url + '" target="_blank">'+ name + '</a>'});
+//push it into the infowindow array
+    infoWindows.push(infoWindow);
+//make it so the infoWindow pops up when you click the marker and all other infoWindows close
     marker.addListener('click', function(){
       infoWindow.open(map, marker)})
 
@@ -591,8 +628,6 @@ function clearMarkers(){
    });
    markers = [];
 }
-
-
 
 //init is called everytime the web page laucnches
 init();

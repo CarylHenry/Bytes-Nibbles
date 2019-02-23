@@ -13,21 +13,35 @@
    background-image: url("food_pattern.jpg");
    padding-left: 7.5%;
    padding-right: 7.5%;
+   text-align: center;
+   color: white;
+   font-family: 'Roboto', sans-serif;
  }
 
  #header{
-   font-family: 'Roboto', sans-serif;
-
-   color: white;
    border-radius: 20px;
    background-color: #ce2b2e;
 
    margin-top: 80px;
-   margin-bottom: 60px;
+   margin-bottom: 40px;
+ }
+
+ #no-results{
+   border-radius: 20px;
+   width: auto;
+   margin-bottom: 40px;
+   padding: 30px;
+
+   font-size: 1.6em;
+   font-weight: lighter;
+   letter-spacing: .2em;
+
+   background-color: rgb(74, 168, 48);
+
+   display: none;
  }
 
  #title{
-   text-align: center;
    text-transform: lowercase;
    letter-spacing: .2em;
    padding-top: 40px;

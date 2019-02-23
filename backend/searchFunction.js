@@ -247,7 +247,7 @@ function init() {
   // var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
   // initHelper(myurl3);
   displayMap();
-        
+
 }
 //the intHelper helps us call the yelp api in the init function
 function initHelper(url){
@@ -429,7 +429,7 @@ function searchById(id) {
       }
       var la=data.coordinates.latitude;
       var lo= data.coordinates.longitude;
-      var center = {lat: la, lng: lo}; 
+      var center = {lat: la, lng: lo};
       map.setCenter(center);
       map.setZoom(17);
       // if (bool1 == false){

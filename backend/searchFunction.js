@@ -3,7 +3,6 @@ var map;
 //These two arrays correspond to all markers and inforWindows shown on the map
 var markers = [];
 var infoWindows = [];
-var test = [];
 var mapQualities = {
   center: {lat: 42.047719, lng: -87.683712},
   zoom: 16.3,
@@ -220,16 +219,30 @@ var mapQualities = {
   ]
 };
 
-
+//What the map initially displays
 function displayMap() {
-
-//What area the map displays
-//What the map centers on + user controls for display
     var evanston = new google.maps.Map(document.getElementById('map'), mapQualities);
     map = evanston;
-
 }
 
+function initTime(){
+  //initializes the time search inputs based on the current time
+  //get the current date
+  var now = new Date();
+  //get the current hour
+  var h = now.getHours();
+  if(h<10){h='0'+h;}
+  //get the current minutes
+  var m = now.getMinutes();
+  if(m<10){m='0'+m;}
+  //time="hour:minutes"
+  var time= '' + h + ":" + m +'';
+  var timeOfDay = document.getElementsByClassName('search-item');
+  document.getElementById('timeofday').value = time;
+  //get the current day (0-6, where 0=Sunday)
+  var d = ''+now.getDay();
+  document.getElementById(d).selected ="selected";
+}
 
 //init function called at the start of the launch
 //this calls the api to check for currently opened busniesses and shows them on the map
@@ -238,7 +251,7 @@ function init() {
   //what we are doing here getting the first 150 results //
   //by calling the api three times and using different offsets for each one
   //Here we are calling for results 0 - 49
-  var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&radius=2000" ;
+  var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&latitude=42.047719&longitude=-87.683712&open_now=true&limit=50&radius=1000" ;
   initHelper(myurl);
   // //Here we are calling for results 50 - 99
   // var myurl2 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=50&radius=2000" ;
@@ -247,29 +260,25 @@ function init() {
   // var myurl3 = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=evanston&open_now=true&limit=50&offset=100&radius=2000" ;
   // initHelper(myurl3);
   displayMap();
+  initTime();
 
 }
 //the intHelper helps us call the yelp api in the init function
 function initHelper(url){
   $.ajax({
      url: url,
-     headers: {
-      'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',
-  },
+     headers: {'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',},
      method: 'GET',
      dataType: 'json',
      success: function(data){
         var totalresults = data.total;
         if (totalresults != 0) {
-        totalOpened = totalresults;
-        var i = 0;
-        for (i; i < totalresults; i++) {
-          addMarker(data.businesses[i]);
+          var i = 0;
+          for (i; i < totalresults; i++) {
+            addMarker(data.businesses[i]);
         }
       }
-      else {
-        //alert("no results found");
-      }
+      else {document.getElementById("no-results").style.display="block"}
      }
    });
 }
@@ -291,48 +300,28 @@ function searchByName() {
   //now we are actually calling the api, using GET, it returns a jason object
   $.ajax({
      url: myurl,
-     headers: {
-       //Authorization goes by the form "Bearer ApiKEY"
-      'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',
-  },
-  method: 'GET',
-  dataType: 'json',
-  async: false,
-  success: function(data){
-     if(data.businesses == ""){
-       //alert("no result found");
-       return;
+     headers: {'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',},
+     method: 'GET',
+     dataType: 'json',
+     async: false,
+     success: function(data){
+       if(data.businesses == ""){
+         document.getElementById("no-results").style.display="block"
+         return;
+        }
+       else{
+         var found_count=0;
+         var found=0;
+         for (var i=0; i < data.businesses.length; i++){
+           var id = data.businesses[i].id;
+           found=searchById(id);
+           found_count+=found;
+          }
+          if(found_count==0){document.getElementById("no-results").style.display="block";}
+          else{document.getElementById("no-results").style.display="none"}
+       }
      }
-     var i = 0;
-     for (i; i < data.businesses.length; i++){
-     var id = data.businesses[i].id;
-     var name = data.businesses[i].name;
-     test.push(name);
-     //alert("found " + name);
-     searchById(id);
-   }
-   }
   });
-
-  var len = test.length;
-  var i = 0;
-
-  var output;
-  if (len == 1){
-  output = len + " restaraunt found:\n";}
-
-  else if (len >= 2){
-  output = len + " restaraunts found:\n";}
-
-  else {
-  output = "nothing found";
-  }
-
-  for (i; i < len; i ++){
-    output = output + test[i] + '\n';
-  }
-  alert(output);
-  test = [];
 }
 // This what the returned structure for autocomplete search
 // In our search we are utilizing the IDs returned in theBUSNIESSES array that gives us returned lists of name
@@ -398,10 +387,9 @@ function searchById(id) {
           bool = data.hours[0].is_open_now;
           if (bool == true ) {
             addMarker(data);
-            //alert(data.name + " is open now!");}
-          //else {
-            //alert(data.name + " is closed right now");
+            return 1;
           }
+          else{return 0;}
       }
     else {
       var bool1 = false;
@@ -423,15 +411,19 @@ function searchById(id) {
             }
           }
       });
+      var return_val;
       if (bool1 == true){
         addMarker(data);
+        return_val = 1;
         //alert(data.name + " is open now!");
       }
+      else{return_val=0}
       var la=data.coordinates.latitude;
       var lo= data.coordinates.longitude;
       var center = {lat: la, lng: lo};
       map.setCenter(center);
       map.setZoom(17);
+      return return_val;
       // if (bool1 == false){
       //   var disp = "";
       //   //(openTimes[0]);
@@ -595,4 +587,4 @@ function clearMarkers(){
 
 
 //init is called everytime the web page laucnches
-init();
+window.onload=init;

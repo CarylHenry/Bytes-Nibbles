@@ -317,7 +317,7 @@ function searchByName() {
            found=searchById(id);
            found_count+=found;
           }
-          if(found_count==0){document.getElementById("no-results").style.display="block";}
+          if(found_count ==0){document.getElementById("no-results").style.display="block";}
           else{document.getElementById("no-results").style.display="none"}
        }
      }
@@ -415,14 +415,15 @@ function searchById(id) {
       if (bool1 == true){
         addMarker(data);
         return_val = 1;
+        var la=data.coordinates.latitude;
+        var lo= data.coordinates.longitude;
+        var center = {lat: la, lng: lo};
+        map.setCenter(center);
+        map.setZoom(17);
         //alert(data.name + " is open now!");
       }
       else{return_val=0}
-      var la=data.coordinates.latitude;
-      var lo= data.coordinates.longitude;
-      var center = {lat: la, lng: lo};
-      map.setCenter(center);
-      map.setZoom(17);
+
       return return_val;
       // if (bool1 == false){
       //   var disp = "";

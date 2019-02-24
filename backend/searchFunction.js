@@ -275,7 +275,7 @@ function initHelper(url){
         if (totalresults != 0) {
           var i = 0;
           for (i; i < totalresults; i++) {
-            addMarker(data.businesses[i]);
+            addMarkers(data.businesses[i]);
         }
       }
       else {document.getElementById("no-results").style.display="block"}
@@ -372,7 +372,7 @@ function searchById(id) {
   // this is the same api call from avbe except the search is now a id search
    var d = document.getElementById("weekday").value;
    var time = document.getElementById("timeofday").value;
-   var date = parseInt(d, 10);
+   var date = (parseInt(d, 10) + 6) % 7;
    time = "" + time.substring(0,2) + time.substring(time.length-2,time.length);
    var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + id;
    $.ajax({
@@ -551,6 +551,30 @@ function searchById(id) {
 //     "special_hours": []
 // }
 
+function addMarkers(data) {
+    var name = data.name;
+    var url = data.url
+    var coords = {lat: data.coordinates.latitude,lng: data.coordinates.longitude};
+//add a new marker object
+    var marker = new google.maps.Marker({
+      position: coords,
+      map: map
+    });
+//push this marker in the markers array
+    markers.push(marker);
+//make a new info window with this page
+    var infoWindow=new google.maps.InfoWindow({
+      content: '<a href= "'+ url + '" target="_blank">'+ name + '</a>'});
+//push it into the infowindow array
+    infoWindows.push(infoWindow);
+//make it so the infoWindow pops up when you click the marker and all other infoWindows close
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker)})
+
+    map.addListener('click', function(){
+        infoWindow.close();});
+}
+
 function addMarker(data) {
     var name = data.name;
     var url = data.url
@@ -568,6 +592,7 @@ function addMarker(data) {
 //push it into the infowindow array
     infoWindows.push(infoWindow);
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close
+    infoWindow.open(map, marker);
     marker.addListener('click', function(){
       infoWindow.open(map, marker)})
 

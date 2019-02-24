@@ -292,6 +292,7 @@ function searchByName() {
   clearMarkers();
   // Get search value form html
   var q = document.getElementById("search").value;
+  if (q != "") {
   //Gnerate URL to call the api
   //The form of the url goes like this:
   //"https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=" + SEARCHWORD +"&latitude=42.047719&longitude=-87.683712"
@@ -317,11 +318,40 @@ function searchByName() {
            found=searchById(id);
            found_count+=found;
           }
-          if(found_count ==0){document.getElementById("no-results").style.display="block";}
+          if(found_count==0){document.getElementById("no-results").style.display="block";}
           else{document.getElementById("no-results").style.display="none"}
        }
      }
-  });
+  });}
+
+  else{
+
+    var d = new Date();
+    var sunday = d.getDate() - d.getDay();
+
+    var secOfDay = d.getDay() * 86400 + d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+    var sundayTime = (d.getTime() - (d.getTime() % 1000)) /1000 - secOfDay;
+
+
+    var day = document.getElementById("weekday").value;
+    var time = document.getElementById("timeofday").value;
+    time = "" + time.substring(0,2) + time.substring(time.length-2,time.length);
+    var seconds = (time % 100) * 60 + (time - time % 100)/100 * 3600;
+    var unix = 0;
+    if (day == 0) {
+      unix = sundayTime +  seconds;
+    }
+    else {
+    unix= sundayTime + seconds - (7 - day) * 86400;}
+
+    var myurl = "https://cors-anywhere.herokuapp.com/"
+                + "https://api.yelp.com/v3/businesses/"
+                + "search?term=restaurant&latitude=42.047719&longitude=-87.683712&"
+                + "open_at=" + unix + "&limit=50&radius=1000" ;
+
+    initHelper(myurl);
+
+  }
 }
 // This what the returned structure for autocomplete search
 // In our search we are utilizing the IDs returned in theBUSNIESSES array that gives us returned lists of name
@@ -570,7 +600,8 @@ function addMarkers(data) {
     infoWindows.push(infoWindow);
 //make it so the infoWindow pops up when you click the marker and all other infoWindows close
     marker.addListener('click', function(){
-      infoWindow.open(map, marker)})
+      infoWindow.open(map, marker);
+    })
 
     map.addListener('click', function(){
         infoWindow.close();});

@@ -327,22 +327,19 @@ function searchByName() {
   else{
 
     var d = new Date();
-    var sunday = d.getDate() - d.getDay();
-
-    var secOfDay = d.getDay() * 86400 + d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
-    var sundayTime = (d.getTime() - (d.getTime() % 1000)) /1000 - secOfDay;
+    var secOfDay = d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+    var todayTime = (d.getTime() - (d.getTime() % 1000)) /1000 - secOfDay;
 
 
     var day = document.getElementById("weekday").value;
+    if (day == 0) {day = 7;}
+    var dayDif = d.getDay() - day;
     var time = document.getElementById("timeofday").value;
     time = "" + time.substring(0,2) + time.substring(time.length-2,time.length);
     var seconds = (time % 100) * 60 + (time - time % 100)/100 * 3600;
-    var unix = 0;
-    if (day == 0) {
-      unix = sundayTime +  seconds;
-    }
-    else {
-    unix= sundayTime + seconds - (7 - day) * 86400;}
+
+
+    var unix= todayTime + seconds - dayDif * 86400;
 
     var myurl = "https://cors-anywhere.herokuapp.com/"
                 + "https://api.yelp.com/v3/businesses/"

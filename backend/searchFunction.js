@@ -292,38 +292,41 @@ function searchByName() {
   clearMarkers();
   // Get search value form html
   var q = document.getElementById("search").value;
+  //if there is a search term
   if (q != "") {
-  //Gnerate URL to call the api
-  //The form of the url goes like this:
-  //"https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=" + SEARCHWORD +"&latitude=42.047719&longitude=-87.683712"
-  //location coords corespond to the location of the center of the maps
-  var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=" + q +"&latitude=42.047719&longitude=-87.683712";
-  //now we are actually calling the api, using GET, it returns a jason object
-  $.ajax({
-     url: myurl,
-     headers: {'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',},
-     method: 'GET',
-     dataType: 'json',
-     async: false,
-     success: function(data){
-       if(data.businesses == ""){
-         document.getElementById("no-results").style.display="block"
-         return;
-        }
-       else{
-         var found_count=0;
-         var found=0;
-         for (var i=0; i < data.businesses.length; i++){
-           var id = data.businesses[i].id;
-           found=searchById(id);
-           found_count+=found;
+    //Gnerate URL to call the api
+    //The form of the url goes like this:
+    //"https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=" + SEARCHWORD +"&latitude=42.047719&longitude=-87.683712"
+    //location coords corespond to the location of the center of the maps
+    var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=" + q +"&latitude=42.047719&longitude=-87.683712";
+    //now we are actually calling the api, using GET, it returns a jason object
+    $.ajax({
+       url: myurl,
+       headers: {'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',},
+       method: 'GET',
+       dataType: 'json',
+       async: false,
+       success: function(data){
+         //if there's no restaurant with the specified term
+         if(data.businesses == ""){
+           document.getElementById("no-results").style.display="block"
+           return;
           }
-          if(found_count==0){document.getElementById("no-results").style.display="block";}
-          else{document.getElementById("no-results").style.display="none"}
-       }
-     }
-  });}
+          //if there's at least one restaurant with the specified term
+         else{
+           var found_count=0;
+           var found=0;
+           //check if these restaraunts are open according to the search time
+           for (var i=0; i < data.businesses.length; i++){
+             var id = data.businesses[i].id;
+             searchById(id);
+             }
 
+            //if none of the restaraunts are open, display the no-results div
+            if(markers.length==0){document.getElementById("no-results").style.display="block";}
+            else{document.getElementById("no-results").style.display="none"}
+         }}});}
+  //if there is no search term, just search by the input time
   else{
 
     var d = new Date();
@@ -397,6 +400,7 @@ function searchByName() {
 // The structure of the businesse object is shown below the funtion
 function searchById(id) {
   // this is the same api call from avbe except the search is now a id search
+  //get the input time
    var d = document.getElementById("weekday").value;
    var time = document.getElementById("timeofday").value;
    var date = (parseInt(d, 10) + 6) % 7;
@@ -405,53 +409,48 @@ function searchById(id) {
    $.ajax({
       url: myurl,
       headers: {
-       'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',
-   },
-   method: 'GET',
-   dataType: 'json',
-   success: function(data){
-    if (time == "" || date == -1){
-          bool = data.hours[0].is_open_now;
-          if (bool == true ) {
-            addMarker(data);
-            return 1;
-          }
-          else{return 0;}
-      }
-    else {
-      var bool1 = false;
-      var openTimes = [];
-      var closeTimes = [];
-      var openTimesTmr = [];
-      data.hours[0].open.forEach(function(open){
-          if (!bool1){
-
-            var day = open.day
-            if (day == date) {
-                bool1 = open.start <= time && open.end >= time;
-                openTimes.push(open.start);
-                closeTimes.push(open.end);
-
+       'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',},
+     method: 'GET',
+     dataType: 'json',
+     fail: function(){return 0;},
+     success: function(data){
+      //if the user didn't specify a time, search for a restaraunt at the current time
+      if (time == "" || date == -1){
+            bool = data.hours[0].is_open_now;
+            if (bool == true ) {
+              addMarker(data);
+              return 1;
             }
-            if (day == (date + 1) % 7) {
-              openTimesTmr.push(open.start);
-            }
-          }
-      });
-      var return_val;
-      if (bool1 == true){
-        addMarker(data);
-        return_val = 1;
-        var la=data.coordinates.latitude;
-        var lo= data.coordinates.longitude;
-        var center = {lat: la, lng: lo};
-        map.setCenter(center);
-        map.setZoom(17);
-        //alert(data.name + " is open now!");
-      }
-      else{return_val=0}
+            else{return 0;}}
+      //if the user did specify a time
+      else {
+        var bool1 = false;
+        var openTimes = [];
+        var closeTimes = [];
+        var openTimesTmr = [];
+        data.hours[0].open.forEach(function(open){
+            if (!bool1){
+              var day = open.day
+              if (day == date) {
+                  bool1 = open.start <= time && open.end >= time;
+                  openTimes.push(open.start);
+                  closeTimes.push(open.end);}
+              if (day == (date + 1) % 7) {
+                openTimesTmr.push(open.start);}}});
+        var return_val;
+        if (bool1 == true){
+          addMarker(data);
+          return_val = 1;
+          var la=data.coordinates.latitude;
+          var lo= data.coordinates.longitude;
+          var center = {lat: la, lng: lo};
+          map.setCenter(center);
+          map.setZoom(17);
+          //alert(data.name + " is open now!");
+        }
+        else{return_val=0}
 
-      return return_val;
+        return return_val;
       // if (bool1 == false){
       //   var disp = "";
       //   //(openTimes[0]);

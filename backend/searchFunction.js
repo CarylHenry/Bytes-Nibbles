@@ -244,6 +244,13 @@ function initTime(){
   document.getElementById(d).selected ="selected";
 }
 
+
+
+  
+    
+
+
+
 //init function called at the start of the launch
 //this calls the api to check for currently opened busniesses and shows them on the map
 function init() {
@@ -262,6 +269,13 @@ function init() {
   displayMap();
   initTime();
 
+
+  var input = document.getElementById("search");
+  input.addEventListener("keyup", function(event){
+
+    if(event.keyCode===13 && input.value!=""){
+        event.preventDefault(); 
+       $("#button").click();}})
 }
 //the intHelper helps us call the yelp api in the init function
 function initHelper(url){

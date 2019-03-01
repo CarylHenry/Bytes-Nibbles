@@ -412,6 +412,7 @@ function searchById(id) {
        'Authorization':'Bearer 7-uNealg5uVCOofbvSItfxosg8aoTHPS7ZmsjqyP12Va7SyKQdgt8lII8_qeVIDe7Ibcz7Z93RfMwyz5xVArMPb6tejoT_fuWrBUwn0QCOtiJkaQwaY2sLNTGizuW3Yx',},
      method: 'GET',
      dataType: 'json',
+     async: false,
      fail: function(){return 0;},
      success: function(data){
       //if the user didn't specify a time, search for a restaraunt at the current time

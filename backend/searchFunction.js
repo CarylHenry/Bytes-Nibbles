@@ -246,8 +246,8 @@ function initTime(){
 
 
 
-  
-    
+
+
 
 
 
@@ -274,7 +274,7 @@ function init() {
   input.addEventListener("keyup", function(event){
 
     if(event.keyCode===13 && input.value!=""){
-        event.preventDefault(); 
+        event.preventDefault();
        $("#button").click();}})
 }
 //the intHelper helps us call the yelp api in the init function
@@ -295,6 +295,8 @@ function initHelper(url){
       else {document.getElementById("no-results").style.display="block"}
      }
    });
+   map.setZoom(15);
+   map.setCenter({lat: 42.047719, lng: -87.683712});
 }
 
 //in this search we are generating autocomplete results based on what is searched
@@ -364,6 +366,7 @@ function searchByName() {
                 + "open_at=" + unix + "&limit=50&radius=1000" ;
 
     initHelper(myurl);
+
 
   }
 }
